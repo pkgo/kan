@@ -6,8 +6,13 @@ type Wrap struct {
 	Err      bool        `json:"err"`
 	ErrMsg   string      `json:"errMsg"`
 	Status   string      `json:"status"`
-	Duration uint        `json:"duration"`
+	Duration int64       `json:"duration"`
 	Data     interface{} `json:"data"`
+}
+
+func (vw *Wrap) SetDuration(duration int64) Wrap {
+	vw.Duration = duration
+	return *vw
 }
 
 // Success will new a Wrap struct with success
