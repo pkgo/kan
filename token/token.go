@@ -1,13 +1,13 @@
-package auth
+package token
 
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/pkgo/kan/vo"
 )
 
-type Policy func(*gin.Context) bool
+type PermissionPolicy func(*gin.Context) bool
 
-func Auth(c *gin.Context, policies ...Policy) bool {
+func Permission(c *gin.Context, policies ...PermissionPolicy) bool {
 	for _, value := range policies {
 		b := value(c)
 		if b {
@@ -17,5 +17,3 @@ func Auth(c *gin.Context, policies ...Policy) bool {
 	c.JSON(401, vo.Error("未授权"))
 	return false
 }
-
-
