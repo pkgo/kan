@@ -5,9 +5,9 @@ import (
 	"github.com/pkgo/kan/vo"
 )
 
-type PermissionPolicy func(*gin.Context) bool
+type policy func(*gin.Context) bool
 
-func Permission(c *gin.Context, policies ...PermissionPolicy) bool {
+func Permission(c *gin.Context, policies ...policy) bool {
 	for _, value := range policies {
 		b := value(c)
 		if b {
